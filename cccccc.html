@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kompaniya</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
+body{background:#f6fbff;color:#222}
+.hero{
+  min-height:100vh;display:flex;flex-direction:column;
+  justify-content:center;align-items:center;text-align:center;padding:40px;
+  background:linear-gradient(135deg,#cdb4db,#bde0fe);
+}
+.hero h1{font-size:48px}
+.hero p{max-width:520px;margin-top:14px;color:#333}
+.hero a{
+  margin-top:26px;padding:14px 22px;border-radius:999px;
+  background:#111;color:#fff;text-decoration:none;
+}
+.section{padding:80px 20px;max-width:1100px;margin:auto}
+.section h2{text-align:center;font-size:36px;margin-bottom:40px}
+.grid{display:flex;flex-wrap:wrap;gap:20px;justify-content:center}
+.card{
+  width:300px;background:#fff;border-radius:20px;padding:16px;
+  box-shadow:0 20px 40px rgba(0,0,0,.1);
+  transform:translateY(60px);opacity:0;transition:0.8s;
+}
+.card.show{transform:translateY(0);opacity:1}
+.card img{
+  width:100%;height:160px;border-radius:14px;
+  object-fit:cover;margin-bottom:12px;
+}
+.team img{height:200px}
+.cta{
+  background:linear-gradient(135deg,#bde0fe,#cdb4db);
+  padding:70px 20px;text-align:center;
+}
+.cta h2{font-size:34px}
+.cta a{
+  display:inline-block;margin-top:20px;
+  padding:14px 22px;border-radius:999px;
+  background:#111;color:#fff;text-decoration:none;
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>Future Company</h1>
+  <p>Biz biznesingizni yangi bosqichga olib chiqadigan zamonaviy raqamli yechimlar yaratamiz.</p>
+  <a href="#about">Boshlash</a>
+</div>
+
+<div class="section" id="about">
+  <h2>Biz haqimizda</h2>
+  <div class="grid">
+    <div class="card">Innovatsiya va sifat — bizning asosiy qadriyatimiz.</div>
+    <div class="card">Har bir loyiha mijoz ehtiyojiga mos yaratiladi.</div>
+    <div class="card">Biz bilan ishlash oson va ishonchli.</div>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Xizmatlar</h2>
+  <div class="grid" id="services"></div>
+</div>
+
+<div class="section">
+  <h2>Jamoamiz</h2>
+  <div class="grid" id="team"></div>
+</div>
+
+<div class="cta">
+  <h2>Loyihangizni bugun boshlaymizmi?</h2>
+  <a href="#">Bog‘lanish</a>
+</div>
+
+<script>
+// Ishonchli rasm manbasi (picsum) + fallback
+var services=[
+ {t:"Web Dizayn",d:"Zamonaviy saytlar",i:"https://picsum.photos/seed/web/800/600"},
+ {t:"Brending",d:"Kuchli imij",i:"https://picsum.photos/seed/brand/800/600"},
+ {t:"Marketing",d:"O‘sish strategiyasi",i:"https://picsum.photos/seed/market/800/600"}
+];
+
+var team=[
+ {t:"Direktor",i:"https://picsum.photos/seed/ceo/800/600"},
+ {t:"Dizayner",i:"https://picsum.photos/seed/designer/800/600"},
+ {t:"Dasturchi",i:"https://picsum.photos/seed/dev/800/600"}
+];
+
+// Xizmatlar
+var s=document.getElementById("services");
+for(var i=0;i<services.length;i++){
+  var c=document.createElement("div");
+  c.className="card";
+  c.innerHTML=
+    '<img src="'+services[i].i+'" onerror="this.src=\'https://picsum.photos/800/600\'">'+
+    '<h3>'+services[i].t+'</h3>'+
+    '<p>'+services[i].d+'</p>';
+  s.appendChild(c);
+}
+
+// Jamoa
+var t=document.getElementById("team");
+for(var j=0;j<team.length;j++){
+  var d=document.createElement("div");
+  d.className="card team";
+  d.innerHTML=
+    '<img src="'+team[j].i+'" onerror="this.src=\'https://picsum.photos/800/600\'">'+
+    '<h3>'+team[j].t+'</h3>';
+  t.appendChild(d);
+}
+
+// Scroll animatsiya (oddiy, hamma brauzerda ishlaydi)
+function show(){
+  var cards=document.getElementsByClassName("card");
+  for(var i=0;i<cards.length;i++){
+    var r=cards[i].getBoundingClientRect();
+    if(r.top < window.innerHeight-60){
+      cards[i].className="card show";
+    }
+  }
+}
+window.onscroll=show;
+show();
+</script>
+
+</body>
+</html>
